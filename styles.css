@@ -1,0 +1,212 @@
+/* =====================
+   GLOBAL VARIABLES
+===================== */
+:root {
+    --bg-main: #0b1020;
+    --bg-soft: #11172d;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --accent: #4f46e5;
+    --accent-glow: rgba(79, 70, 229, 0.6);
+    --text-main: #e5e7eb;
+    --text-muted: #9ca3af;
+}
+
+/* =====================
+   RESET
+===================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", system-ui, sans-serif;
+}
+
+body {
+    background:
+            radial-gradient(circle at 20% 20%, #1e1b4b, transparent 40%),
+            radial-gradient(circle at 80% 0%, #312e81, transparent 35%),
+            var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* =====================
+   SECTIONS
+===================== */
+section {
+    padding: 20px 10%;
+    position: relative;
+    animation: fadeUp 1s ease forwards;
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 70px 6%;
+    }
+}
+
+/* =====================
+   HERO
+===================== */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    background: linear-gradient(90deg, #818cf8, #22d3ee);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+    animation: glow 3s ease-in-out infinite;
+}
+
+.hero p {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+}
+
+/* =====================
+   CARDS
+===================== */
+.card {
+    background: linear-gradient(
+            180deg,
+            var(--card-bg),
+            rgba(255, 255, 255, 0.02)
+    );
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow:
+            0 20px 50px rgba(0, 0, 0, 0.6),
+            inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+            0 30px 70px rgba(0, 0, 0, 0.7),
+            0 0 40px var(--accent-glow);
+}
+
+.card h2 {
+    margin-bottom: 16px;
+    font-size: 1.6rem;
+}
+
+.card p {
+    color: var(--text-muted);
+}
+
+/* =====================
+   LISTS (ETAPY)
+===================== */
+ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+li {
+    background: rgba(255, 255, 255, 0.04);
+    padding: 14px 16px;
+    border-radius: 14px;
+    border-left: 4px solid var(--accent);
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+li:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(6px);
+}
+
+/* =====================
+   INPUTS & BUTTONS
+===================== */
+input {
+    width: 100%;
+    margin-top: 12px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--text-main);
+    outline: none;
+}
+
+input::placeholder {
+    color: var(--text-muted);
+}
+
+button {
+    margin-top: 16px;
+    padding: 12px 20px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, #4f46e5, #22d3ee);
+    box-shadow: 0 10px 30px rgba(34, 211, 238, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(34, 211, 238, 0.6);
+}
+
+/* =====================
+   IDEAS OUTPUT
+===================== */
+#app {
+    padding-top: 40px;
+}
+
+.idea {
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeUp 0.6s ease forwards;
+}
+
+.idea strong {
+    color: #a5b4fc;
+}
+
+/* =====================
+   ANIMATIONS
+===================== */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        filter: drop-shadow(0 0 10px rgba(129, 140, 248, 0.4));
+    }
+    50% {
+        filter: drop-shadow(0 0 25px rgba(34, 211, 238, 0.7));
+    }
+}
