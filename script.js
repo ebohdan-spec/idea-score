@@ -40,6 +40,7 @@ const IDEA_MODEL = {
             max: 10
         },
     }
+
 };
 /* =========================
    CURRENT (USER-EDITABLE) WEIGHTS
