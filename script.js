@@ -5,28 +5,81 @@ const IDEA_MODEL = {
     title: "Генератор та оцінка ідей",
     criteria: {
         innovation: {
-            label: "Інноваційність",
+            label: "Новизна",
             hint: "Рівень новизни ідеї",
-            weight: 0.4,
+            weight: 0.25,
             min: 0,
             max: 10
         },
         feasibility: {
-            label: "Реалізованість",
+            label: "Доцільність",
             hint: "Наскільки реально впровадити",
-            weight: 0.35,
+            weight: 0.2,
             min: 0,
             max: 10
         },
         value: {
-            label: "Цінність",
-            hint: "Користь для користувача або бізнесу",
+            label: "Створення цінності",
+            hint: "Здатність ідеї формувати економічну, соціальну та сп",
             weight: 0.25,
+            min: 0,
+            max: 10
+        },
+        value: {
+            label: "Орієнтація на користувача",
+            hint: "Користь для користувача або бізнесу",
+            weight: 0.2,
+            min: 0,
+            max: 10
+        },
+        value: {
+            label: "Масштабованість",
+            hint: "Потенціал ідеї до розширення, тиражування та адаптації в інших контекстах",
+            weight: 0.1,
             min: 0,
             max: 10
         },
     }
 };
+/* =========================
+   CURRENT (USER-EDITABLE) WEIGHTS
+========================= */
+let currentWeights = { ...DEFAULT_WEIGHTS };
+
+/* =========================
+   UPDATE WEIGHTS FUNCTION
+========================= */
+function updateWeights(newWeights) {
+    const total = Object.values(newWeights).reduce((sum, w) => sum + w, 0);
+
+    if (total === 0) {
+        console.warn("Сума ваг не може дорівнювати 0");
+        return;
+    }
+
+    // Нормалізація (щоб сума = 1)
+    Object.keys(newWeights).forEach(key => {
+        if (currentWeights.hasOwnProperty(key)) {
+            currentWeights[key] = newWeights[key] / total;
+        }
+    });
+}
+
+/* =========================
+   CALCULATE IDEA INDEX
+========================= */
+function calculateIdeaIndex(idea) {
+    return Object.keys(currentWeights).reduce((sum, key) => {
+        return sum + (idea[key] * currentWeights[key]);
+    }, 0);
+}
+
+/* =========================
+   RESET TO DEFAULT
+========================= */
+function resetWeights() {
+    currentWeights = { ...DEFAULT_WEIGHTS };
+}
 
 /* =========================
    STATE
